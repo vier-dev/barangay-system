@@ -141,7 +141,7 @@ include './app/components/head.php';
                             <circle cx="38" cy="38" r="36"></circle>
                         </svg>
                         <div class="percentage">
-                            <p>+81%</p>
+                            <p>+45%</p>
                         </div>
                     </div>
                 </div>

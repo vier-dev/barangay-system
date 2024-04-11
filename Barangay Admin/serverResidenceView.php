@@ -24,7 +24,9 @@ if ($_GET["action"] === "blotterHistory") {
 // function to fetch data based on full_name
 if ($_GET["action"] === "refreshBlotterHistory") {
 
-  $sql = "SELECT * FROM `blotter`";
+  $full_name = $_POST['full_name'];
+
+  $sql = "SELECT * FROM `blotter` WHERE `defendant`=$full_name";
   $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) > 0) {

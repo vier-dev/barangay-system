@@ -53,7 +53,7 @@ $(document).ready(function () {
     function showBlotter() {
       const full_name = $('#full_name').val();
         
-      $.get( 'serverZ.php', { full_name: full_name }, function(results) {
+      $.get( 'serverResidenceView.php?=refreshBlotterHistory', { full_name: full_name }, function(results) {
         const tbody = $("#viewTable tbody")
         tbody.empty();
 
