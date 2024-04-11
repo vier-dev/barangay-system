@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --color-primary: #6C9BCF;
+    --color-secondary: #5496e1;
+    --color-danger: #FF0060;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 16px;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    background-color: var(--color-background);
+}
+
+a{
+    color: var(--color-dark);
+    text-decoration: none;
+}
+
+h2{
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.card{
+    width: 25rem;
+    height: auto;
+    margin-top: 3rem;
+    border-radius: var(--border-radius-2);
+}
+
+.card-img-top span{
+    font-size: 10rem;
+    color: var(--color-primary);
+}
+
+.card-body form .capitalize input {
+    text-transform: capitalize;
+}
+
+.btn{
+    width: auto;
+    height: 2.7rem;
+    margin-top: 0.8rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn:hover{
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+}
+
+.message{
+    width: 72vw;
+}
