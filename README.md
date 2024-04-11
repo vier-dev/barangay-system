@@ -35,12 +35,3 @@ This Barangay System is a web-based application designed to manage the operation
 3. Add/edit/delete residents, officials, and blotter records as needed.
 4. Generate reports and manage user accounts from the admin panel.
 
-## Contributors
-
-- [Your Name](https://github.com/your-username)
-- [Contributor 1](https://github.com/contributor1)
-- [Contributor 2](https://github.com/contributor2)
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
