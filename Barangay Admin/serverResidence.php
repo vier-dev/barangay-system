@@ -40,13 +40,13 @@ if ($_GET["action"] === "insertData") {
 
       echo json_encode([
           "statusCode" => 200,
-          "message" => "Successfully added a User!"
+          "message" => "Successfully added a Resident!"
       ]);
       } else {
 
           echo json_encode([
               "statusCode" => 500,
-              "message" => "Failed to add User"
+              "message" => "Failed to add Resident"
           ]);
       }
     } else {
@@ -94,7 +94,7 @@ if ($_GET["action"] === "updateData") {
     $id = mysqli_real_escape_string($conn, $_POST["id"]);
 
     // check whether record exists or not
-    if (!empty($_POST['full_name']) && !empty($_POST['gender']) && !empty($_POST['birthday']) && !empty($_POST['address']) && !empty($_POST['phone']) &&!empty($_POST['social_status']) && !empty($_POST['religion']) && !empty($_POST['resident_status']) && $_FILES["image"]["size"] != 0) {
+    if (!empty($_POST['full_name']) && !empty($_POST['gender']) && !empty($_POST['birthday']) && !empty($_POST['address']) && !empty($_POST['phone']) &&!empty($_POST['social_status']) && !empty($_POST['religion']) && !empty($_POST['resident_status'])) {
     
       $full_name = mysqli_real_escape_string($conn, $_POST["full_name"]);
       $gender = mysqli_real_escape_string($conn, $_POST["gender"]);
@@ -127,12 +127,12 @@ if ($_GET["action"] === "updateData") {
       if (mysqli_query($conn, $sql)) {
         echo json_encode([
           "statusCode" => 200,
-          "message" => "Data updated successfully"
+          "message" => "Resident Data updated successfully"
         ]);
       } else {
         echo json_encode([
           "statusCode" => 500,
-          "message" => "Failed to update data"
+          "message" => "Failed to update Resident data"
         ]);
       }
       mysqli_close($conn);
@@ -160,12 +160,12 @@ if ($_GET["action"] === "deleteData") {
 
     echo json_encode([
       "statusCode" => 200,
-      "message" => "Data deleted successfully"
+      "message" => "Resident Data deleted successfully"
     ]);
   } else {
     echo json_encode([
       "statusCode" => 500,
-      "message" => "Failed to delete data"
+      "message" => "Failed to delete Resident data"
     ]);
   }
 }
@@ -202,6 +202,24 @@ if ($_GET["action"] === "viewData") {
     ]);
   }
   mysqli_close($conn);
+}
+
+
+// function to fetch data
+if ($_GET["action"] === "blotterHistory") {
+  
+  $sql = "SELECT * FROM `blotter`";
+  $result = mysqli_query($conn, $sql);
+
+  $data = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
+  }
+  mysqli_close($conn);
+  header('Content-Type: application/json');
+  echo json_encode([
+    "data" => $data
+  ]);
 }
 
 ?>

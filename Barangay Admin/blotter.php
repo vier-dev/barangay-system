@@ -138,14 +138,6 @@ include './api/config/database.php';
                             </div>
                         </a>
                     </button>
-
-                    <button type="button" class="btn btn-secondary mb-4">
-                        <a href="#">
-                            <div class="d-flex align-items-center" style="color: white;">
-                                <span class="material-icons-sharp px-2" > print </span> Print
-                            </div>
-                        </a>
-                    </button>
                 </div>
             </div>
 
@@ -154,9 +146,9 @@ include './api/config/database.php';
                     <tr>
                         <th class="text-center">CASE ID</th>
                         <th class="text-center">DEFENDANT</th>
-                        <th class="text-center">COMPLAINANT'S NAME</th>
-                        <th class="text-center">ACCUSATION</th>
-                        <th class="text-center">DATE FILED</th>
+                        <th class="text-center">COMPLAINANT</th>
+                        <th class="text-center">INCIDENT DATE</th>
+                        <th class="text-center">DESCRIPTION</th>
                         <th class="text-center">STATUS</th>
                         <th class="text-center">ACTION</th>
                     </tr>
@@ -179,7 +171,7 @@ include './api/config/database.php';
                             <form method="POST" id="insertForm">
 
                                 <div class="row">
-                                    <div class="mb-3 capitalize col-md-6 col-sm-6">
+                                    <div class="mb-3 col-md-6 col-sm-6">
                                         <label for="defendant" class="form-label">Defendant's Name</label>
                                         <select name="defendant" id="defendant" class="form-control" required>
                                         <option value="" selected disabled hidden>Defendant</option>
@@ -210,7 +202,7 @@ include './api/config/database.php';
                                         </select>
                                     </div>
 
-                                    <div class="mb-3 capitalize col-md-6 col-sm-6">
+                                    <div class="mb-3 col-md-6 col-sm-6">
                                         <label for="complainant" class="form-label">Complainant's Name</label>
                                         <select name="complainant" id="complainant" class="form-control" required>
                                         <option value="" selected disabled hidden>Complainant</option>
@@ -228,7 +220,11 @@ include './api/config/database.php';
                                 </div>
 
                                 <div class="row">
-                                    <div class="mb-3 col-md-6 col-sm-6">
+                                    <div class="mb-3 col-md-4 col-sm-4">
+                                        <label for="incident_date" class="form-label">Incident Date</label>
+                                        <input type="date" id="incident_date" name="incident_date" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3 col-md-4 col-sm-4">
                                         <label for="status" class="form-label">Status</label>
                                         <select name="status" id="status" class="form-control">
                                             <option value="" selected disabled hidden>Status</option>
@@ -236,14 +232,14 @@ include './api/config/database.php';
                                             <option value="Settled">Settled</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3 col-md-6 col-sm-6">
-                                        <label for="date" class="form-label">Date of Complain</label>
-                                        <input type="date" id="date" name="date" class="form-control" required>
+                                    <div class="mb-3 col-md-4 col-sm-4">
+                                        <label for="date_file" class="form-label">Date of Complain</label>
+                                        <input type="date" id="date_file" name="date_file" class="form-control" required>
                                     </div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="accusation" class="form-label">Accusation</label>
+                                    <label for="accusation" class="form-label">Complaint Description</label>
                                     <textarea class="form-control" id="accusation" name="accusation" rows="3" placeholder="Enter your report here..."></textarea>
                                 </div>
 
@@ -268,7 +264,7 @@ include './api/config/database.php';
                                 <input type="hidden" name="id" id="id">
 
                                 <div class="row">
-                                    <div class="mb-3 capitalize col-md-6 col-sm-6">
+                                    <div class="mb-3 col-md-6 col-sm-6">
                                         <label for="defendant" class="form-label">Defendant's Name</label>
                                         <select name="defendant" id="defendant" class="form-control" required>
                                         <option value="" selected disabled hidden>Defendant</option>
@@ -299,7 +295,7 @@ include './api/config/database.php';
                                         </select>
                                     </div>
 
-                                    <div class="mb-3 capitalize col-md-6 col-sm-6">
+                                    <div class="mb-3 col-md-6 col-sm-6">
                                         <label for="complainant" class="form-label">Complainant's Name</label>
                                         <select name="complainant" id="complainant" class="form-control" required>
                                         <option value="" selected disabled hidden>Complainant</option>
@@ -317,7 +313,11 @@ include './api/config/database.php';
                                 </div>
 
                                 <div class="row">
-                                    <div class="mb-3 col-md-6 col-sm-6">
+                                    <div class="mb-3 col-md-4 col-sm-4">
+                                        <label for="incident_date" class="form-label">Incident Date</label>
+                                        <input type="date" id="incident_date" name="incident_date" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3 col-md-4 col-sm-4">
                                         <label for="status" class="form-label">Status</label>
                                         <select name="status" id="status" class="form-control">
                                             <option value="" selected disabled hidden>Status</option>
@@ -325,14 +325,14 @@ include './api/config/database.php';
                                             <option value="Settled">Settled</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3 col-md-6 col-sm-6">
-                                        <label for="date" class="form-label">Date of Complain</label>
-                                        <input type="date" id="date" name="date" class="form-control" required>
+                                    <div class="mb-3 col-md-4 col-sm-4">
+                                        <label for="date_file" class="form-label">Date of Complain</label>
+                                        <input type="date" id="date_file" name="date_file" class="form-control" required>
                                     </div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="accusation" class="form-label">Accusation</label>
+                                    <label for="accusation" class="form-label">Complaint Description</label>
                                     <textarea class="form-control" id="accusation" name="accusation" rows="3" placeholder="Enter your report here..."></textarea>
                                 </div>
 

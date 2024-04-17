@@ -143,7 +143,7 @@ include './api/config/database.php';
 
                         <div class="mb-3">
                             <label for="full_name" class="form-label">Resident's Name</label><br>
-                            <input type="text" class="form-control " name="full_name" id="full_name" placeholder="Dunkin Jr, John B." readonly>
+                            <input type="text" class="form-control " name="full_name" id="full_name" readonly>
                         </div>
                         
                         <div class="row">
@@ -192,8 +192,6 @@ include './api/config/database.php';
                 <div class="col-md-8 col-sm-8">
                     <h1>Blotter History of Resident</h1>
                     
-                    <button class="btn btn-warning mt-4" id="refreshBtn"><i class="fa fa-refresh px-2"></i>Refresh Data</button>
-
                     <div class="residentTable mt-3">
                         <table class="table table-hover align-middle" id="viewTable" style="width: 100%;">
                             <thead>

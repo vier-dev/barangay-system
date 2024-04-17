@@ -93,7 +93,7 @@ if ($_GET["action"] === "updateData") {
     $id = mysqli_real_escape_string($conn, $_POST["id"]);
 
     // check whether record exists or not
-    if (!empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['birthday']) && !empty($_POST['address']) &&!empty($_POST['position']) && !empty($_POST['description']) && $_FILES["image"]["size"] != 0) {
+    if (!empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['birthday']) && !empty($_POST['address']) &&!empty($_POST['position']) && !empty($_POST['description'])) {
     
         $name = mysqli_real_escape_string($conn, $_POST["name"]);
         $gender = mysqli_real_escape_string($conn, $_POST["gender"]);

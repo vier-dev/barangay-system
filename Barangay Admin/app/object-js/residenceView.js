@@ -51,45 +51,26 @@ $(document).ready(function () {
     
     //blotter history
     function showBlotter() {
-      const full_name = $('#full_name').val();
-        
-      $.get( 'serverResidenceView.php?=refreshBlotterHistory', { full_name: full_name }, function(results) {
-        const tbody = $("#viewTable tbody")
-        tbody.empty();
-
-        for(var i = 0; i<results.length; i++) {
-          var item = results[i]
-          tbody.append("<tr>" +
-          "<td>" + item.defendant + "</td>" +
-          "<td>" + item.complainant + "</td>" +
-          "<td>" + item.blotter_date + "</td>" +
-          "<td>" + item.blotter_accusation + "</td>" +
-          "<td>" + item.blotter_status + "</td>" +
-          "</tr>")
-        }
-      })
+      $.ajax({
+        url: "serverResidence.php?action=blotterHistory",
+        dataType: "JSON",
+        success: function (response) {
+          
+          var data = response.data;
+          table.clear().draw();
+  
+          $.each(data, function (index, value) {
+            table.row
+              .add([
+                value.defendant,
+                value.complainant,
+                value.blotter_accusation,
+                value.date_filed,
+                value.blotter_status
+              ])
+              .draw(false);
+          });
+        },
+      });
     }
-
-    // // Handle click event for refresh button
-    // $('#refreshBtn').click(function() {
-    //   // Retrieve blotter data from server-side script
-    //   const full_name = $('#full_name').val();
-        
-    //   $.get( '/blotter', { full_name: full_name }, function(results) {
-    //     const tbody = $("#viewTable tbody")
-    //     tbody.empty();
-
-    //     for(var i = 0; i<results.length; i++) {
-    //       var item = results[i]
-    //       tbody.append("<tr>" +
-    //       "<td>" + item.blotter_date + "</td>" +
-    //       "<td>" + item.blotter_accusation + "</td>" +
-    //       "</tr>")
-    //     }
-    //   })
-    //});
-
-    
-
-
 });

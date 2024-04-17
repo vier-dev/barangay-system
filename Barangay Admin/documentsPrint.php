@@ -33,7 +33,7 @@ $pdf->setFont('helvetica', '', 14);
 $header = <<<EOD
 
 Republic of the Philippines
-Province of Zamboanga
+Province of Manila
 Municipality of Caren
 EOD;
 
@@ -103,7 +103,7 @@ $pdf->writeHTML
 <p> <b>THIS IS TO FURTHER CERTIFY</b> that the above named person is of good moral standing and has no degatory record on file or 
 whatsoever as per our record. </p>
 <p> <b> THIS CERTIFICATION </b>is issued upon personal request of the above named person on the purpose <i>$purpose</i>.</p>
-<p> <b> ISSUED</b> on $date at Barangay Caren, Zamboanga. </p>
+<p> <b> ISSUED</b> on $date at Barangay Caren, Philippines. </p>
 <br>
 <br>
 

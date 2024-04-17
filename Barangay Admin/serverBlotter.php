@@ -3,7 +3,7 @@ include "./api/config/database.php";
 
 // function to fetch data
 if ($_GET["action"] === "fetchData") {
-  $sql = "SELECT * FROM `blotter`";
+  $sql = "SELECT * FROM `blotter` WHERE blotter_status='Active'";
 
   $result = mysqli_query($conn, $sql);
   $data = [];
@@ -19,16 +19,17 @@ if ($_GET["action"] === "fetchData") {
 
 // insert data to database
 if ($_GET["action"] === "insertData") {
-    if (!empty($_POST['defendant']) && !empty($_POST['complainant']) && !empty($_POST['status']) && !empty($_POST['date']) &&!empty($_POST['accusation'])) {
+    if (!empty($_POST['defendant']) && !empty($_POST['complainant']) && !empty($_POST['status']) && !empty($_POST['incident_date']) &&!empty($_POST['accusation']) &&!empty($_POST['date_file'])) {
     
     $defendant = mysqli_real_escape_string($conn, $_POST["defendant"]);
     $complainant = mysqli_real_escape_string($conn, $_POST["complainant"]);
     $status = mysqli_real_escape_string($conn, $_POST["status"]);
-    $date = mysqli_real_escape_string($conn, $_POST["date"]);
+    $incident_date = mysqli_real_escape_string($conn, $_POST["incident_date"]);
     $accusation = mysqli_real_escape_string($conn, $_POST["accusation"]);
+    $date_file = mysqli_real_escape_string($conn, $_POST["date_file"]);
 
-    $sql = "INSERT INTO `blotter`(`blotter_id`, `defendant`, `complainant`, `blotter_status`, `blotter_accusation`, `blotter_date`) 
-    VALUES (NULL,'$defendant','$complainant','$status', '$accusation', '$date')";
+    $sql = "INSERT INTO `blotter`(`blotter_id`, `defendant`, `complainant`, `blotter_status`, `incident_date`, `blotter_accusation`, `date_filed`) 
+    VALUES (NULL,'$defendant','$complainant','$status', '$incident_date', '$accusation', '$date_file')";
       
     if (mysqli_query($conn, $sql)) {
 
@@ -85,15 +86,16 @@ if ($_GET["action"] === "updateData") {
     $id = mysqli_real_escape_string($conn, $_POST["id"]);
 
     // check whether record exists or not
-    if (!empty($_POST['defendant']) && !empty($_POST['complainant']) && !empty($_POST['status']) && !empty($_POST['date']) &&!empty($_POST['accusation'])) {
+    if (!empty($_POST['defendant']) && !empty($_POST['complainant']) && !empty($_POST['status']) && !empty($_POST['incident_date']) &&!empty($_POST['accusation']) &&!empty($_POST['date_file'])) {
     
       $defendant = mysqli_real_escape_string($conn, $_POST["defendant"]);
       $complainant = mysqli_real_escape_string($conn, $_POST["complainant"]);
       $status = mysqli_real_escape_string($conn, $_POST["status"]);
-      $date = mysqli_real_escape_string($conn, $_POST["date"]);
+      $incident_date = mysqli_real_escape_string($conn, $_POST["incident_date"]);
       $accusation = mysqli_real_escape_string($conn, $_POST["accusation"]);
+      $date_file = mysqli_real_escape_string($conn, $_POST["date_file"]);
 
-      $sql = "UPDATE `blotter` SET `defendant`='$defendant',`complainant`='$complainant',`blotter_accusation`='$accusation',`blotter_date`='$date',`blotter_status`='$status' WHERE `blotter_id`=$id";
+      $sql = "UPDATE `blotter` SET `defendant`='$defendant',`complainant`='$complainant',`blotter_accusation`='$accusation',`incident_date`='$incident_date',`blotter_status`='$status' ,`date_filed`='$date_file' WHERE `blotter_id`=$id";
     
       if (mysqli_query($conn, $sql)) {
         echo json_encode([
@@ -136,6 +138,37 @@ if ($_GET["action"] === "deleteData") {
       "message" => "Failed to delete data"
     ]);
   }
+}
+
+
+if ($_GET["action"] === "printData") {
+
+  // get id from hidden field in form
+  $id = $_POST["id"];
+
+  $sql = "SELECT * FROM `blotter` WHERE `blotter_id`=$id";
+  $result = mysqli_query($conn, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+
+    $data = mysqli_fetch_assoc($result);
+    header("Content-Type: application/json");
+    echo json_encode([
+
+      "statusCode" => 200,
+      "data" => $data
+
+    ]);
+
+  } else {
+
+    echo json_encode([
+      "statusCode" => 404,
+      "message" => "No user found with this id"
+
+    ]);
+  }
+  mysqli_close($conn);
 }
 
 

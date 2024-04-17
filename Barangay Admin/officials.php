@@ -126,7 +126,7 @@ include './app/components/head.php';
                     
                     <div id="card-container"></div>
 
-                    <button class="btn btn-success mt-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCaptain" aria-controls="canvasCaptain">
+                    <button class="btn btn-success mt-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvasCaptain" aria-controls="canvasCaptain" style="margin-left: 2.6rem;">
                         Barangay Captain Information
                     </button>
                     
@@ -205,7 +205,6 @@ include './app/components/head.php';
                                 <th class="text-center">NAME</th>
                                 <th class="text-center">GENDER</th>
                                 <th class="text-center">POSITION</th>
-                                <th class="text-center">DESCRIPTION</th>
                                 <th class="text-center">ACTION</th>
                             </tr>
                         </thead>

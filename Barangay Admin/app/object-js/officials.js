@@ -39,7 +39,6 @@ $(document).ready(function(){
                         value.name,
                         value.gender,
                         value.position,
-                        value.description,
                         '<Button type="button" class="btn editBtn" value="' + value.official_id + '"><i class="fa-regular fa-pen-to-square fa-lg" style="color: #1B9C85;"></i></Button>' +
                         '<Button type="button" class="btn deleteBtn" value="' + value.official_id + '"><i class="fa-regular fa-trash-can fa-lg" style="color: #e11919;"></i></Button>' +
                         '<input type="hidden" class="delete_image" value="' + value.image + '">'

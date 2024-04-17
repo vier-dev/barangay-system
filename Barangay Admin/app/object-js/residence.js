@@ -143,7 +143,9 @@ $(document).ready(function(){
                 id: id
             },
             success: function(response) {
+
                 var data = response.data;
+                
                 $("#updateForm #id").val(data.resident_id);
                 $("#updateForm input[name='full_name']").val(data.full_name);
                 $("#updateForm input[name='birthday']").val(data.birthday);
@@ -151,6 +153,7 @@ $(document).ready(function(){
                 $("#updateForm input[name='phone']").val(data.phone);
                 $("#updateForm select[name='social_status']").val(data.social_status);
                 $("#updateForm select[name='religion']").val(data.religion);
+                
                 $("#updateForm .preview_img").attr("src", "uploads/" + data.image + "");
                 $("#updateForm #image_old").val(data.image);
 

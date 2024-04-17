@@ -244,27 +244,6 @@ include './app/components/head.php';
                     </div>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-center row_3">
-                <div class="status ">
-                    <div class="icon">
-                        <i class="fa-solid fa-certificate"></i>
-                    </div>
-                    <div class="details">
-                        <h4>Non-Residency Cert.</h4>
-                        <div id="num_query_container">
-                            <?php
-                            $non_resident_query = "SELECT * FROM `queries` WHERE subject = 'Barangay Non-Residency'";
-                            $non_resident_query_run = mysqli_query($conn, $non_resident_query);
-
-                            if ($non_residency_total = mysqli_num_rows($non_resident_query_run)) echo '<h4> ' . $non_residency_total . ' </h4>';
-                            else echo '<h4> 0 </h4>';
-                            ?>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- End of Analyses -->
 
@@ -292,7 +271,7 @@ include './app/components/head.php';
         </div>
 
         <div class="modal fade" id="modalAdd" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalAdd" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalAdd">Add New Query</h1>
@@ -303,8 +282,34 @@ include './app/components/head.php';
                         <form method="POST" id="insertForm">
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control " name="name" id="name" placeholder="Johnny Cage" required>
+                                <label for="name" class="form-label">Resident's Name</label>
+                                    <select name="name" id="name" class="form-control" required>
+                                    <option value="" selected disabled hidden>Resident</option>
+                                        <?php
+                                            $resident = "SELECT full_name FROM residents";
+                                            $result = mysqli_query($conn, $resident);
+
+                                            if($result){
+                                                if(mysqli_num_rows($result) > 0) {
+                                                    foreach ($result as $resident_name) 
+                                                    {
+                                                        ?>
+                                                        <option value="<?= $resident_name['full_name'] ;?>"><?= $resident_name['full_name'] ;?></option>
+                                                        <?php
+                                                     }
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="">No Name</option>';
+                                                }
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="">Something wrong</option>';
+                                            }
+
+                                        ?>
+                                    </select>
                             </div>
 
                             <div class="row">
@@ -317,7 +322,6 @@ include './app/components/head.php';
                                         <option value="Barangay Residency">Barangay Residency</option>
                                         <option value="Barangay Clearance">Barangay Clearance</option>
                                         <option value="Business Permit">Business Permit</option>
-                                        <option value="Barangay Non-Residency">Barangay Non-Residency</option>
                                         <option value="First Time Job Seeker">First Time Job Seeker</option>
                                     </select>
                                 </div>
@@ -333,41 +337,37 @@ include './app/components/head.php';
                                 <textarea class="form-control" id="purpose" name="purpose" placeholder="For Employment" rows="3"></textarea>
                             </div>
 
-                            <div class="my-3">
-                                <div class="row">
-                                    <div class="form-group col-md-5 col-sm-5">
-                                        <label class="form-label">Status</label><br>
-                                        <input type="radio" class="form-check-input" name="status" value="Pending">
-                                        <label class="form-input-label">Pending</label>
-                                        &nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="status" value="On Process">
-                                        <label class="form-input-label">On Process</label>
-                                        &nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="status" value="Approved">
-                                        <label class="form-input-label">Approved</label>
-                                    </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label><br>
+                                <input type="radio" class="form-check-input" name="status" value="Pending">
+                                <label class="form-input-label">Pending</label>
+                                &nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="status" value="On Process">
+                                <label class="form-input-label">On Process</label>
+                                &nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="status" value="Approved">
+                                <label class="form-input-label">Approved</label>
+                            </div>
 
-                                    <div class="form-group col-md-7 col-sm-7">
-                                        <label class="form-label">Document Fee</label><br>
-                                        <input type="radio" class="form-check-input" name="fee" value="25">
-                                        <label class="form-input-label">₱25</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="50">
-                                        <label class="form-input-label">₱50</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="75">
-                                        <label class="form-input-label">₱75</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="100">
-                                        <label class="form-input-label">₱100</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="125">
-                                        <label class="form-input-label">₱125</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="150">
-                                        <label class="form-input-label">₱150</label>
-                                    </div>
-                                </div>
+                            <div class="form-group mt-4">
+                                <label class="form-label">Document Fee</label><br>
+                                <input type="radio" class="form-check-input" name="fee" value="25">
+                                <label class="form-input-label">₱25</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="50">
+                                <label class="form-input-label">₱50</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="75">
+                                <label class="form-input-label">₱75</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="100">
+                                <label class="form-input-label">₱100</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="125">
+                                <label class="form-input-label">₱125</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="150">
+                                <label class="form-input-label">₱150</label>
                             </div>
                             <button type="submit" class="btn btn-success mt-3" id="insertBtn">Create New Query</button>
                         </form>
@@ -377,7 +377,7 @@ include './app/components/head.php';
         </div>
 
         <div class="modal fade" id="modalUpdate" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalUpdate" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalUpdate">Edit Query</h1>
@@ -390,8 +390,34 @@ include './app/components/head.php';
                             <input type="hidden" name="id" id="id">
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control " name="name" id="name" placeholder="Johnny Cage" required>
+                                <label for="name" class="form-label">Resident's Name</label>
+                                    <select name="name" id="name" class="form-control" required>
+                                    <option value="" selected disabled hidden>Resident</option>
+                                        <?php
+                                            $resident = "SELECT full_name FROM residents";
+                                            $result = mysqli_query($conn, $resident);
+
+                                            if($result){
+                                                if(mysqli_num_rows($result) > 0) {
+                                                    foreach ($result as $resident_name) 
+                                                    {
+                                                        ?>
+                                                        <option value="<?= $resident_name['full_name'] ;?>"><?= $resident_name['full_name'] ;?></option>
+                                                        <?php
+                                                     }
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="">No Name</option>';
+                                                }
+                                            }
+                                            else
+                                            {
+                                                echo '<option value="">Something wrong</option>';
+                                            }
+
+                                        ?>
+                                    </select>
                             </div>
 
                             <div class="row">
@@ -404,7 +430,6 @@ include './app/components/head.php';
                                         <option value="Barangay Residency">Barangay Residency</option>
                                         <option value="Barangay Clearance">Barangay Clearance</option>
                                         <option value="Business Permit">Business Permit</option>
-                                        <option value="Barangay Non-Residency">Barangay Non-Residency</option>
                                         <option value="First Time Job Seeker">First Time Job Seeker</option>
                                     </select>
                                 </div>
@@ -417,44 +442,40 @@ include './app/components/head.php';
 
                             <div class="mb-3">
                                 <label for="purpose" class="form-label">Purpose</label>
-                                <textarea class="form-control" id="purpose" name="purpose" rows="3"></textarea>
+                                <textarea class="form-control" id="purpose" name="purpose" placeholder="For Employment" rows="3"></textarea>
                             </div>
 
-                            <div class="my-3">
-                                <div class="row">
-                                    <div class="form-group col-md-5 col-sm-5">
-                                        <label class="form-label">Status</label><br>
-                                        <input type="radio" class="form-check-input" name="status" value="Pending">
-                                        <label class="form-input-label">Pending</label>
-                                        &nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="status" value="On Process">
-                                        <label class="form-input-label">On Process</label>
-                                        &nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="status" value="Approved">
-                                        <label class="form-input-label">Approved</label>
-                                    </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label><br>
+                                <input type="radio" class="form-check-input" name="status" value="Pending">
+                                <label class="form-input-label">Pending</label>
+                                &nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="status" value="On Process">
+                                <label class="form-input-label">On Process</label>
+                                &nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="status" value="Approved">
+                                <label class="form-input-label">Approved</label>
+                            </div>
 
-                                    <div class="form-group col-md-7 col-sm-7">
-                                        <label class="form-label">Document Fee</label><br>
-                                        <input type="radio" class="form-check-input" name="fee" value="25">
-                                        <label class="form-input-label">₱25</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="50">
-                                        <label class="form-input-label">₱50</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="75">
-                                        <label class="form-input-label">₱75</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="100">
-                                        <label class="form-input-label">₱100</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="125">
-                                        <label class="form-input-label">₱125</label>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="form-check-input" name="fee" value="150">
-                                        <label class="form-input-label">₱150</label>
-                                    </div>
-                                </div>
+                            <div class="form-group my-4">
+                                <label class="form-label">Document Fee</label><br>
+                                <input type="radio" class="form-check-input" name="fee" value="25">
+                                <label class="form-input-label">₱25</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="50">
+                                <label class="form-input-label">₱50</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="75">
+                                <label class="form-input-label">₱75</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="100">
+                                <label class="form-input-label">₱100</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="125">
+                                <label class="form-input-label">₱125</label>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="form-check-input" name="fee" value="150">
+                                <label class="form-input-label">₱150</label>
                             </div>
                             <button type="submit" class="btn btn-success" id="updateBtn">Update Query</button>
                         </form>

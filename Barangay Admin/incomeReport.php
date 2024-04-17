@@ -171,11 +171,11 @@ include './api/config/database.php';
                         $blotterData = array();
                         $blotter_count = 0;
 
-                        $blotter_run = mysqli_query($conn, 'SELECT * FROM `blotter` GROUP BY blotter_date');
+                        $blotter_run = mysqli_query($conn, 'SELECT date_filed, COUNT(*) as total FROM `blotter` GROUP BY date_filed');
 
                         while($row = mysqli_fetch_array($blotter_run)) {
-                            $blotterData[$blotter_count]['label'] = $row['blotter_date'];
-                            $blotterData[$blotter_count]['y'] = $row['blotter_id'];
+                            $blotterData[$blotter_count]['label'] = $row['date_filed'];
+                            $blotterData[$blotter_count]['y'] = $row['total'];
                             $blotter_count=$blotter_count+1;
                         }
                     ?>

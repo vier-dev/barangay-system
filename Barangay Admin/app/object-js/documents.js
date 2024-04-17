@@ -110,7 +110,7 @@ $(document).ready(function () {
                 var data = response.data;
 
                 $("#updateForm #id").val(data.document_id);
-                $("#updateForm input[name='name']").val(data.name);
+                $("#updateForm select[name='name']").val(data.name);
                 $("#updateForm select[name='subject']").val(data.subject);
                 $("#updateForm input[name='date']").val(data.date);
                 $("#updateForm #purpose").val(data.purpose);
@@ -237,7 +237,7 @@ $(document).ready(function () {
                 var response = response.data;
                 
                 // Redirect to the target page with fetched data as URL parameters
-                const queryString = $.param(response);
+                var queryString = $.param(response);
                 window.location.href = 'documentsView.php?id=' + queryString;
 
             }

@@ -10,11 +10,15 @@ $(document).ready(function(){
                     targets: 4,
                         //color data for status
                         render: function (data) {
-                        if(data === 'Approved') {
-                             return `<span style="color: green;"> ${data} </span>`;
-                        } else {
-                             return data;
-                        }
+                            if(data === 'Pending') {
+                                return `<span style="color: red; "> ${data} </span>`;
+                            } 
+                            else if(data === 'On Process') {
+                                return `<span style="color: orange;"> ${data} </span>`;
+                            }
+                            else if(data === 'Approved') {
+                                return `<span style="color: green;"> ${data} </span>`;
+                            }
                     },
                 },
             ],
@@ -47,7 +51,7 @@ $(document).ready(function(){
 
         $.ajax({
             url: 'serverDocuments.php?action=showDocumentHistory',
-            method: 'GET',
+            method: 'POST',
             dataType: 'JSON',
             success: function(response){
 

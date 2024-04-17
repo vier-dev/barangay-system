@@ -232,7 +232,7 @@ include './app/components/head.php';
                                 </div>
 
                                 <div class="row mb-4 d-flex align-items-center">
-                                    <label class="form-label">Upload Image</label>
+                                    <label class="form-label">Resident Image</label>
                                     <div class="col-3">
                                         <img class="preview_img" src="./app/assets/images/user-preview.png">
                                     </div>
@@ -340,7 +340,7 @@ include './app/components/head.php';
                                 </div>
 
                                 <div class="row mb-4 d-flex align-items-center">
-                                    <label class="form-label">Upload Image</label>
+                                    <label class="form-label">Resident Image</label>
                                     <div class="col-3">
                                         <img class="preview_img" src="./app/assets/images/user-preview.png">
                                     </div>

@@ -38,15 +38,12 @@ $(document).ready(function () {
               value.blotter_id,
               value.defendant,
               value.complainant,
+              value.incident_date,
               value.blotter_accusation,
-              value.blotter_date,
               value.blotter_status,
-              '<Button type="button" class="btn editBtn" value="' +
-                value.blotter_id +
-                '"><i class="fa-regular fa-pen-to-square fa-lg" style="color: #1B9C85;"></i></Button>' +
-                '<Button type="button" class="btn deleteBtn" value="' +
-                value.blotter_id +
-                '"><i class="fa-regular fa-trash-can fa-lg" style="color: #e11919;"></i></Button>',
+              `<Button type="button" class="btn printBtn" value="${value.blotter_id}"><i class="fa fa-print fa-lg" style="color:  #154dd1;"></i></Button>` +
+              `<Button type="button" class="btn editBtn" value="${value.blotter_id}"><i class="fa-regular fa-pen-to-square fa-lg" style="color: #1B9C85;"></i></Button>` +
+              '<Button type="button" class="btn deleteBtn" value="' + value.blotter_id + '"><i class="fa-regular fa-trash-can fa-lg" style="color: #e11919;"></i></Button>',
             ])
             .draw(false);
         });
@@ -112,10 +109,12 @@ $(document).ready(function () {
         $("#updateForm #defendant").val(data.defendant);
         $("#updateForm #complainant").val(data.complainant);
         $("#updateForm #accusation").val(data.blotter_accusation);
-        $("#updateForm input[name='date']").val(data.blotter_date);
+        $("#updateForm input[name='incident_date']").val(data.incident_date);
+        $("#updateForm input[name='date_file']").val(data.date_filed);
         $("#updateForm #status").val(data.blotter_status);
 
         $("#modalUpdate").modal("show");
+
       },
     });
   });
@@ -184,7 +183,34 @@ $(document).ready(function () {
       });
     });
   });
+
+
+  // function to print data
+  $("#myTable").on("click", ".printBtn", function () {
+
+    var id = $(this).val();
+
+      $.ajax({
+        url: "serverBlotter.php?action=printData",
+        method: 'POST',
+        dataType: 'JSON',
+        data: {
+            id: id
+        },
+        success: function(response) {
+
+            var response = response.data;
+            
+            // Redirect to the target page with fetched data as URL parameters
+            var queryString = $.param(response);
+            window.location.href = 'blotterPrint.php?id=' + queryString;
+
+        }
+    });
+  });
 });
+
+
 
 // for archive data
 //initialize archive table
@@ -224,7 +250,7 @@ function showArchive() {
             value.defendant,
             value.complainant,
             value.blotter_accusation,
-            value.blotter_date,
+            value.date_filed,
             value.blotter_status,
           ])
           .draw(false);

@@ -172,7 +172,7 @@ if ($_GET["action"] === "viewData") {
 // function to fetch data
 if ($_GET["action"] === "showDocumentHistory") {
 
-    $sql = "SELECT * FROM `queries` WHERE and status='Approved'";
+    $sql = "SELECT * FROM `queries` WHERE status='Approved'";
 
     $result = mysqli_query($conn, $sql);
     $data = [];
