@@ -97,7 +97,7 @@ include './app/components/head.php';
     <main class="container">
 
         <div class="top d-flex justify-content-between align=items-center mt-3">
-            <h1>Document/Query Section</h1>
+            <h1>Document/Query Management</h1>
 
             <!-- shows who logged in -->
             <?php if (isset($_SESSION['auth_user'])) : ?>
