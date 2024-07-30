@@ -14,7 +14,7 @@ This Barangay System is a web-based application designed to manage the operation
 
 - Frontend: HTML, CSS, JavaScript, Bootstrap
 - Backend: PHP, MySQL
-- Libraries/Frameworks: jQuery, FullCalendar (for calendar functionality), DataTables (for tables)
+- Libraries/Frameworks: jQuery, FullCalendar (for calendar functionality), DataTables (for Data tables)
 
 ## Installation
 
